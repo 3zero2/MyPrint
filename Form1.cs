@@ -76,7 +76,7 @@ namespace myPrint
                 try
                 {
                     printJob.Start();
-                    printJob.WaitForExit(1000 * 60 * 1);
+                    printJob.WaitForExit();
                 }
                 catch (Exception ex)
                 {
@@ -84,8 +84,8 @@ namespace myPrint
                 }
                 finally
                 {
-                    //printJob.Close();
-                    printJob.Kill();
+                    printJob.Close();
+                    //printJob.Kill();
                 }
 
                 File.Delete(filetoprint);
