@@ -59,6 +59,8 @@ namespace myPrint
             btn_stop.Enabled = false;
         }
 
+         
+        
         private void checkFolder(object sender, EventArgs e)
         {
             DirectoryInfo di = new DirectoryInfo(txt_watchedFolder.Text);
@@ -66,30 +68,46 @@ namespace myPrint
             foreach (FileInfo fi in rgFiles)
             {
                 string filetoprint = fi.FullName;
-                toolStripStatusLabel2.Text = filetoprint;
                 
-                Process printJob = new Process();
-                printJob.StartInfo.FileName = filetoprint;
-                printJob.StartInfo.UseShellExecute = true;
-                printJob.StartInfo.Verb = "print";
-                printJob.StartInfo.CreateNoWindow = true;
-                try
+                //use the new PDF method if file is PDF
+                if (fi.Extension.ToUpper() == "PDF")
                 {
-                    printJob.Start();
-                    printJob.WaitForExit(1000 * 60 * 1);
-                }
-                catch (Exception ex)
-                {
-                    toolStripStatusLabel2.Text = "Something went wrong...";
-                }
-                finally
-                {
-                    //printJob.Close();
-                    printJob.Kill();
+                    toolStripStatusLabel2.Text = "Printing PDF";
+                    Pdf.PrintPdf(filetoprint);
                 }
 
+                //else use the normal method
+                else
+                {
+                    toolStripStatusLabel2.Text = filetoprint;
+
+                    Process printJob = new Process();
+                    printJob.StartInfo.FileName = filetoprint;
+                    printJob.StartInfo.UseShellExecute = true;
+                    printJob.StartInfo.Verb = "print";
+                    printJob.StartInfo.CreateNoWindow = true;
+                    try
+                    {
+                        printJob.Start();
+                        printJob.WaitForExit(1000 * 60 * 1);
+                    }
+                    catch (Exception ex)
+                    {
+                        toolStripStatusLabel2.Text = "Something went wrong...";
+                    }
+                    finally
+                    {
+                        printJob.Close();
+                    }
+
+                          
+                }
+
+                //Delete the file
                 File.Delete(filetoprint);
-                toolStripStatusLabel2.Text = "";             
+                toolStripStatusLabel2.Text = "";
+                
+                        
             }
         }
 
