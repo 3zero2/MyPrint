@@ -123,7 +123,7 @@
             // 
             // btn_start
             // 
-            this.btn_start.Location = new System.Drawing.Point(258, 91);
+            this.btn_start.Location = new System.Drawing.Point(252, 91);
             this.btn_start.Name = "btn_start";
             this.btn_start.Size = new System.Drawing.Size(75, 23);
             this.btn_start.TabIndex = 2;
@@ -164,7 +164,7 @@
             this.Name = "Form1";
             this.ShowInTaskbar = false;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "myPrint";
+            this.Text = "2";
             this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
